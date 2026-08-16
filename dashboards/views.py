@@ -119,3 +119,19 @@ def add_user(request):
         'form': form,
     }
     return render(request, 'dashboards/add_user.html', context)
+
+
+def edit_user(request,pk):
+    if request.method == 'POST':
+        user = get_object_or_404(User, pk=pk)
+        form = UserForm(request.POST, instance = user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+    user = get_object_or_404(User, pk=pk)
+    form = UserForm(instance = user)
+    context = {
+        'form': form,
+        'user': user,
+    }
+    return render(request, 'dashboards/edit_user.html', context)
