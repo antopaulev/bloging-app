@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from blogs.models import Blog, Category
 from django.contrib.auth.decorators import login_required
-from .forms import BlogForm, CategoryForm
+from .forms import BlogForm, CategoryForm, UserForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -107,3 +107,15 @@ def users(request):
         'users': users,
     }
     return render(request,'dashboards/users.html', context)
+
+def add_user(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+    form = UserForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'dashboards/add_user.html', context)
