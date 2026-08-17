@@ -8,6 +8,7 @@
     {% include 'dashboards/sidebar.html' %}
     <!-- Right side content -->
     <div class="col-md-9"> 
+        {% if perms.auth.change_user %}
         <h2>Edit User</h2> 
         <form action="{% url 'edit_user' user.id %}" method="POST">
             {% csrf_token %}
@@ -15,7 +16,9 @@
             <button type="submit" class="btn btn-warning">Submit</button>
 
         </form>
-        
+        {% else %}
+        <h2>You do not have permission to view this page.</h2>
+        {% endif %}
     </div>
 </div>
 
