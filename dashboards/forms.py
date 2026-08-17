@@ -17,4 +17,9 @@ class BlogForm(forms.ModelForm):
 class AddUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username','first_name','last_name','email','groups','is_staff', 'is_active')
+        fields = ('username','first_name','last_name','email','groups','is_staff','is_active')
+
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields= ('username','first_name','last_name','email','groups','is_staff','is_active')
